@@ -6,7 +6,7 @@ import json
 API_URL = "https://postman-echo.com/basic-auth"
 API_UNAME = "postman"
 API_PWORD = "password"
-MPV_PATH = "C:\\Users\\Alonzo\\Downloads\\mpv.exe"
+MPV_PATH = "path/to/mpv.exe"
 PRESETS = "presets.json"
 
 def main():
