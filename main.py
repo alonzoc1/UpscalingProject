@@ -3,9 +3,8 @@ import subprocess
 import requests
 import json
 
-API_URL = "https://postman-echo.com/basic-auth"
-API_UNAME = "postman"
-API_PWORD = "password"
+API_URL = "https://some-api-url.com/api"
+AUTH_KEY = "api_key"
 MPV_PATH = "path/to/mpv.exe"
 PRESETS = "presets.json"
 
@@ -13,18 +12,14 @@ def main():
     video_library = getAvailableVideos()
     video_url = askVideoSelection(video_library)
     upscaling_settings = askUpscalingSettings()
-    playRequestedVideo(video_url, upscaling_settings)
+    playRequestedVideo(video_url['url'], upscaling_settings)
 
 def getAvailableVideos():
     """Ping API for video library"""
-    """ Wait for API to get implemented
-    response = requests.get(API_URL, auth=(API_UNAME, API_PWORD))
+    response = requests.get(API_URL, headers={"Authorization" : AUTH_KEY})
     result = response.json()
     print(result)
     return result
-    """
-    # Not yet implemented
-    return ({"video name": "http://video-url.com/video.mp4"})
 
 def askVideoSelection(video_library):
     """Ask user for video selection, return URL of video"""
