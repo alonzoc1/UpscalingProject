@@ -1,11 +1,11 @@
-
 import subprocess
 import requests
 import json
+from pathlib import PurePath
 
-API_URL = "https://some-api-url.com/api"
-AUTH_KEY = "api_key"
-MPV_PATH = "path/to/mpv.exe"
+API_URL = "hidden :)"
+AUTH_KEY = "hidden :)"
+MPV_PATH = "path/to/mpv_binary_or_exe"
 PRESETS = "presets.json"
 
 def main():
@@ -18,7 +18,6 @@ def getAvailableVideos():
     """Ping API for video library"""
     response = requests.get(API_URL, headers={"Authorization" : AUTH_KEY})
     result = response.json()
-    print(result)
     return result
 
 def askVideoSelection(video_library):
@@ -54,7 +53,8 @@ def parseUpscalingSettings(upscaling_settings):
         return ""
     result = '--glsl-shaders="'
     for shader in upscaling_settings[1]:
-        result += shader + ';'
+        # Using PurePath since windows hates forward slashes...
+        result += str(PurePath(shader)) + ';'
     return result + '"'
 
 def playRequestedVideo(video_url, upscaling_settings):
